@@ -4,11 +4,15 @@
 
 A skill for coding agents to declare AI usage transparency via the [DimwitLabs AI-DECLARATION.md](https://ai-declaration.md) spec.
 
+## Why
+
+Disclosing your AI usage is a responsible way to use AI and respect other's time.
+
 ## Usage
 
 ```
-/ai-declare           # guided setup
-/ai-declare copilot   # skip to level
+/ai-declare copilot   # declare at `copilot` level
+/ai-declare           # let the agent guide you through the declaration
 ```
 
 The skill creates/updates `AI-DECLARATION.md` and adds a badge to your `README.md`.
