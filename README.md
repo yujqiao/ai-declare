@@ -8,6 +8,21 @@ A skill for coding agents to declare AI usage transparency via the [DimwitLabs A
 
 Disclosing your AI usage is a responsible way to use AI and respect other's time.
 
+## Installation
+
+Drop the skill into your agent's skills directory. For example:
+
+```bash
+# pi
+git clone https://github.com/yujqiao/ai-declare.git ~/.pi/agent/skills/ai-declare
+
+# Claude Code
+git clone https://github.com/yujqiao/ai-declare.git ~/.claude/skills/ai-declare
+
+# Codex
+git clone https://github.com/yujqiao/ai-declare.git ~/.codex/skills/ai-declare
+```
+
 ## Usage
 
 ```
@@ -17,7 +32,7 @@ Disclosing your AI usage is a responsible way to use AI and respect other's time
 
 The skill creates/updates `AI-DECLARATION.md` and adds a badge to your `README.md`.
 
-## Levels
+### Levels
 
 | Level | Meaning |
 |-------|---------|
