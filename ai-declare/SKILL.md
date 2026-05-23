@@ -19,12 +19,12 @@ This skill should also be used when the user asks to "declare AI usage", "add an
 
 | Level | Meaning |
 |-------|---------|
-| `none` | Human acts alone; no AI involvement |
-| `hint` | AI surfaces suggestions passively |
-| `assist` | Human prompts; AI acts on a part of the task |
-| `pair` | Both act equally; Human understands internals |
-| `copilot` | AI acts on the whole task, prompting Human for permission |
-| `auto` | AI acts autonomously to completion |
+| `none` | Human acts on the task alone with no AI involvement. |
+| `hint` | Human acts on the task and the AI surfaces suggestions passively. |
+| `assist` | Human prompts and the AI acts on a part of the task. |
+| `pair` | Human prompts as both human and AI both act on the task equally; Human understands internals clearly. |
+| `copilot` | Human prompts and AI acts on the whole task, prompting the Human for permission or clarification. |
+| `auto` | Human prompts and AI acts autonomously bringing the task to completion. |
 
 ## Process
 
@@ -53,12 +53,12 @@ Ask the user if they want to declare **processes** (granular per-phase) or just 
 > 2. **Per-process** — Different levels for different phases
 
 If they choose per-process, ask about each process:
-- `design` — Architecture, system design, decision-making
+- `design` — Architecture, system design, and decision-making
 - `implementation` — Writing production code
-- `testing` — Writing tests, test plans, QA
-- `documentation` — Writing docs, comments, READMEs
-- `review` — Code review, PR feedback
-- `deployment` — CI/CD config, infra, release scripts
+- `testing` — Writing tests, test plans, and quality assurance
+- `documentation` — Writing docs, comments, READMEs, and changelogs
+- `review` — Code review and pull request feedback
+- `deployment` — CI/CD configuration, infrastructure, and release scripts
 
 ### Step 3: Create or update AI-DECLARATION.md
 

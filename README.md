@@ -21,12 +21,12 @@ The skill creates/updates `AI-DECLARATION.md` and adds a badge to your `README.m
 
 | Level | Meaning |
 |-------|---------|
-| `none` | Human acts alone; no AI involvement |
-| `hint` | AI surfaces suggestions passively |
-| `assist` | Human prompts; AI acts on a part of the task |
-| `pair` | Both act equally; Human understands internals |
-| `copilot` | AI acts on the whole task, prompting Human for permission |
-| `auto` | AI acts autonomously to completion |
+| `none` | Human acts on the task alone with no AI involvement. |
+| `hint` | Human acts on the task and the AI surfaces suggestions passively. |
+| `assist` | Human prompts and the AI acts on a part of the task. |
+| `pair` | Human prompts as both human and AI both act on the task equally; Human understands internals clearly. |
+| `copilot` | Human prompts and AI acts on the whole task, prompting the Human for permission or clarification. |
+| `auto` | Human prompts and AI acts autonomously bringing the task to completion. |
 
 ## Reference
 
