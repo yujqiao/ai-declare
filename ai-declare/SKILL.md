@@ -1,6 +1,6 @@
 ---
 name: ai-declare
-description: Use when the user invokes "/declare" to add or update an AI-DECLARATION.md file and badge in their project. Handles AI usage transparency declaration per the DimwitLabs spec.
+description: Use when the user invokes "/ai-declare" to add or update an AI-DECLARATION.md file and badge in their project. Handles AI usage transparency declaration per the DimwitLabs spec.
 ---
 
 # AI Declaration
@@ -30,7 +30,7 @@ This skill should also be used when the user asks to "declare AI usage", "add an
 
 ### Step 1: Determine the level
 
-If the user provided a level with the command (e.g. `/declare copilot`), validate it against the six valid levels. If valid, proceed. If invalid, tell the user and list valid options.
+If the user provided a level with the command (e.g. `/ai-declare copilot`), validate it against the six valid levels. If valid, proceed. If invalid, tell the user and list valid options.
 
 If **no level was specified**, ask the user to select one:
 
@@ -62,13 +62,13 @@ If they choose per-process, ask about each process:
 
 ### Step 3: Create or update AI-DECLARATION.md
 
-Write `AI-DECLARATION.md` in the project root. Use version `0.1.1`.
+Write `AI-DECLARATION.md` in the project root. Use version `0.1.2`.
 
 **Minimal template (global level only):**
 
 ```markdown
 ---
-version: "0.1.1"
+version: "0.1.2"
 level: <level>
 ---
 
@@ -83,7 +83,7 @@ This format is based on [AI-DECLARATION.md](https://ai-declaration.md/en/0.1.2).
 
 ```markdown
 ---
-version: "0.1.1"
+version: "0.1.2"
 level: <highest-level>
 processes:
   design: <level>
@@ -128,7 +128,7 @@ After creating/updating both files, summarize what was done:
 
 ## Common Mistakes
 
-- **Wrong version string**: Must be `"0.1.1"` (quoted, with patch version)
+- **Wrong version string**: Must be `"0.1.2"` (quoted, with patch version)
 - **Global level lower than process levels**: The global `level` must be the maximum of all declared process levels
 - **Forgetting the `## Notes` section**: It's required by the spec even if empty
 - **Invalid level names**: Only the six defined levels are valid
@@ -138,4 +138,4 @@ After creating/updating both files, summarize what was done:
 
 - Spec homepage: https://ai-declaration.md
 - Spec repo: https://github.com/DimwitLabs/AI-DECLARATION.md
-- Current version: 0.1.1
+- Current version: 0.1.2
