@@ -4,9 +4,9 @@
 
 A skill for coding agents to declare AI usage transparency via the [DimwitLabs AI-DECLARATION.md](https://ai-declaration.md) spec.
 
-## Why
+## Motivation
 
-Disclosing your AI usage is a responsible way to use AI and respect other's time.
+Disclosing your AI usage helps others to understand your open source contribution better and more effectively.
 
 ## Installation
 
