@@ -15,32 +15,48 @@ Triggered by the `/ai-declare` command:
 
 This skill should also be used when the user asks to "declare AI usage", "add an AI declaration", or "set up AI-DECLARATION".
 
-## Levels
+## Spec Fidelity
 
-| Level | Meaning |
-|-------|---------|
-| `none` | Human acts on the task alone with no AI involvement. |
-| `hint` | Human acts on the task and the AI surfaces suggestions passively. |
-| `assist` | Human prompts and the AI acts on a part of the task. |
-| `pair` | Human prompts as both human and AI both act on the task equally; Human understands internals clearly. |
-| `copilot` | Human prompts and AI acts on the whole task, prompting the Human for permission or clarification. |
-| `auto` | Human prompts and AI acts autonomously bringing the task to completion. |
+The spec evolves. Do **not** rephrase or paraphrase any text taken from the spec — version strings, level names, and level definitions must be reproduced verbatim. Treat the upstream spec as the single source of truth.
 
 ## Process
 
+### Step 0: Fetch the current spec
+
+Before prompting the user, fetch the live spec so that the skill stays in sync with upstream without code changes:
+
+1. Fetch `https://raw.githubusercontent.com/DimwitLabs/AI-DECLARATION.md/main/package.json` and read the `version` field — this is the **current spec version**.
+2. Fetch `https://raw.githubusercontent.com/DimwitLabs/AI-DECLARATION.md/main/README.md` and extract the level definitions block (the bullet list under the `Levels` heading, beginning with `` - `none`: ``). These are the **verbatim level definitions** to present to the user and to embed anywhere this skill quotes the spec.
+
+If either fetch fails (offline, rate-limited, etc.), fall back to the frozen snapshot below and tell the user the skill is using the offline fallback.
+
+**Frozen fallback (spec `0.1.2`, 2026-04-14):**
+
+- `none`: Human acts on the task alone with no AI involvement.
+- `hint`: Human acts on the task and the AI surfaces suggestions passively.
+- `assist`: Human prompts and the AI acts on a part of the task.
+- `pair`: Human prompts as both human and AI both act on the task equally; Human understands internals clearly.
+- `copilot`: Human prompts and AI acts on the whole task, prompting the Human for permission or clarification.
+- `auto`: Human prompts and AI acts autonomously bringing the task to completion.
+
+Use the fetched (or fallback) values for `<version>` and the level definitions in every subsequent step.
+
 ### Step 1: Determine the level
 
-If the user provided a level with the command (e.g. `/ai-declare copilot`), validate it against the six valid levels. If valid, proceed. If invalid, tell the user and list valid options.
+If the user provided a level with the command (e.g. `/ai-declare copilot`), validate it against the level names returned in Step 0. If valid, proceed. If invalid, tell the user and list valid options.
 
-If **no level was specified**, ask the user to select one:
+If **no level was specified**, ask the user to select one, presenting the level bullets **verbatim** as fetched in Step 0:
 
 > Which AI involvement level best describes this project?
-> 1. **none** — No AI tools used
-> 2. **hint** — AI surfaced suggestions passively
-> 3. **assist** — AI helped with parts of tasks
-> 4. **pair** — Human and AI collaborated equally
-> 5. **copilot** — AI generated most code with human oversight
-> 6. **auto** — AI built the project autonomously
+>
+> - `none`: Human acts on the task alone with no AI involvement.
+> - `hint`: Human acts on the task and the AI surfaces suggestions passively.
+> - `assist`: Human prompts and the AI acts on a part of the task.
+> - `pair`: Human prompts as both human and AI both act on the task equally; Human understands internals clearly.
+> - `copilot`: Human prompts and AI acts on the whole task, prompting the Human for permission or clarification.
+> - `auto`: Human prompts and AI acts autonomously bringing the task to completion.
+
+(The bullets above are the frozen fallback; substitute the fetched bullets when available.)
 
 Wait for the user to respond before proceeding.
 
@@ -62,17 +78,17 @@ If they choose per-process, ask about each process:
 
 ### Step 3: Create or update AI-DECLARATION.md
 
-Write `AI-DECLARATION.md` in the project root. Use version `0.1.2`.
+Write `AI-DECLARATION.md` in the project root. Use `<version>` from Step 0 (do not hardcode).
 
 **Minimal template (global level only):**
 
 ```markdown
 ---
-version: "0.1.2"
+version: "<version>"
 level: <level>
 ---
 
-This format is based on [AI-DECLARATION.md](https://ai-declaration.md/en/0.1.2).
+This format is based on [AI-DECLARATION.md](https://ai-declaration.md/en/<version>).
 
 ## Notes
 
@@ -83,14 +99,14 @@ This format is based on [AI-DECLARATION.md](https://ai-declaration.md/en/0.1.2).
 
 ```markdown
 ---
-version: "0.1.2"
+version: "<version>"
 level: <highest-level>
 processes:
   design: <level>
   implementation: <level>
 ---
 
-This format is based on [AI-DECLARATION.md](https://ai-declaration.md/en/0.1.2).
+This format is based on [AI-DECLARATION.md](https://ai-declaration.md/en/<version>).
 
 ## Notes
 
@@ -128,14 +144,18 @@ After creating/updating both files, summarize what was done:
 
 ## Common Mistakes
 
-- **Wrong version string**: Must be `"0.1.2"` (quoted, with patch version)
+- **Hardcoding a stale version**: Always use the `<version>` fetched in Step 0; never paste a literal version into the skill
+- **Unquoted version string**: The frontmatter value must be a quoted string (e.g. `"0.1.2"`), not a bare number
 - **Global level lower than process levels**: The global `level` must be the maximum of all declared process levels
 - **Forgetting the `## Notes` section**: It's required by the spec even if empty
-- **Invalid level names**: Only the six defined levels are valid
+- **Invalid level names**: Only the level names returned by Step 0 are valid
+- **Paraphrasing the spec**: Level descriptions presented to the user must be verbatim from the upstream README
 - **Overwriting user notes**: When updating an existing file, preserve any `## Notes` content the user has written
 
 ## Reference
 
 - Spec homepage: https://ai-declaration.md
 - Spec repo: https://github.com/DimwitLabs/AI-DECLARATION.md
-- Current version: 0.1.2
+- Spec version source (fetched at runtime): https://raw.githubusercontent.com/DimwitLabs/AI-DECLARATION.md/main/package.json
+- Spec level definitions source (fetched at runtime): https://raw.githubusercontent.com/DimwitLabs/AI-DECLARATION.md/main/README.md
+- Frozen fallback version: `0.1.2`
