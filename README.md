@@ -30,7 +30,7 @@ git clone https://github.com/yujqiao/ai-declare.git ~/.codex/skills/ai-declare
 /ai-declare           # let the agent guide you through the declaration
 ```
 
-The skill creates/updates `AI-DECLARATION.md` and adds a badge to your `README.md`.
+The skill creates/updates `AI-DECLARATION.md` and adds a badge to your `README.md`, then validates the result against the [spec API](https://ai-declaration.md/api/) so mistakes are caught rather than shipped.
 
 ### Levels
 
